@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>11_ajax</title>
+</head>
+<body>
+<div id="example"></div>
+
+<script src="../js/react.js"></script>
+<script src="../js/react-dom.js"></script>
+<script src="../js/babel.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.17.1/axios.js"></script>
+<script type="text/babel">
+
+/*
+1. React没有ajax模块
+  * 集成其它的js库(如jQuery/fetch/axios), 发送ajax请求
+2. 使用axios
+  * https://github.com/mzabriskie/axios
+3. 使用fetch:
+  * https://github.github.io/fetch/
+  * https://segmentfault.com/a/1190000003810652
+4. 测试url:
+  * https://api.github.com/users/octocat/gists
+*/
+
+  // 定义组件
+  class UserGist extends React.Component{
+    constructor(props){
+      super(props);
+      // 初始化状态
+      this.state = {
+        gistUrl: null
+      };
+    }
+    componentWillMount(){
+      let url =  `https://api.github.com/users/octocat/gists`;
+//      axios.get(url)
+//          .then( (response) => {
+//            console.log(response);
+//            let data = response.data;
+//            // 更新状态
+//            this.setState({
+//              gistUrl: data[0].html_url
+//            });
+//          })
+//          .catch( (error) => {
+//            console.log(error);
+//          })
+
+
+      fetch(url)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          // 更新状态
+          this.setState({
+            gistUrl: data[0].html_url
+          });
+        })
+        .catch((e) => {
+          console.log("Oops, error");
+        });
+
+    }
+    render(){
+      let {gistUrl} = this.state;
+      if(!gistUrl){
+        return (
+            <div>loading...</div>
+        )
+      }else {
+        return <p>{this.props.name}'s last gist is <a href={gistUrl}>here</a></p>
+      }
+
+    }
+  }
+  ReactDOM.render(<UserGist name='octocat'/>, document.getElementById('example'));
+
+</script>
+</body>
+</html>
+
+
+

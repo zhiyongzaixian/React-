@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>05_components_composing</title>
+</head>
+<body>
+<div>
+  <h2>Welcome A!</h2>
+  <h2>Welcome B!</h2>
+  <h2>Welcome C!</h2>
+</div>
+<hr>
+
+<div id="example"></div>
+
+<script src="../js/react.js"></script>
+<script src="../js/react-dom.js"></script>
+<script src="../js/babel.min.js"></script>
+
+<script type="text/babel">
+  /*
+   1. 拆分组件: 拆分界面, 抽取组件
+     * 单个标题组件: Welcome
+     * 应用组件: App
+   2. 分析确定传递数据和数据类型
+     * Welcome: props.name  string
+     * App: props.names    array
+   */
+
+  // 定义组件 App
+  class App extends React.Component {
+    render(){
+      // 获取传递进来的数据
+      let {names} = this.props;
+      return (
+          <div>
+            {
+              names.map((item, index) => {
+                return <Welcome key={index} name={item}/>
+              })
+            }
+          </div>
+      )
+    }
+  }
+
+  // 定义Welcome组件
+  function Welcome(props) {
+    console.log(this);// undefined
+    return <h2>Welcome {props.name}</h2>
+  }
+  
+  let names = ['kobe', 'wade', 'anverson', 'duncan'];
+  
+  // 渲染组件
+  ReactDOM.render(<App names={names}/>, document.getElementById('example'));
+
+</script>
+</body>
+</html>

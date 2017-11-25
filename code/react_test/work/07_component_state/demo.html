@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>07_state_demo</title>
+</head>
+<body>
+  <div>
+    <h2>Simple TODO List</h2>
+    <input type="text">
+    <button>Add #4</button>
+    <ul>
+      <li>吃饭</li>
+      <li>睡觉</li>
+      <li>打豆豆</li>
+    </ul>
+  </div>
+  <hr>
+
+  <div id="example">在此实现页面效果和功能</div>
+
+  <script src="../js/react.js"></script>
+  <script src="../js/react-dom.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    /*
+    功能: 组件化实现此功能
+      1. 界面显示如上所示
+      2. 输入文本, 点击按钮显示到下面列表的首位, 并清除输入的文本
+     */
+    /*
+    分解组件:
+      列表: TodoList
+        props: todos
+      应用: App
+        state: todos, inputTodo
+     */
+    /*
+    问题: 完善功能
+      1). 如果没有输入或输入的只是空格, 不添加到列表
+      2). 如果输入的文本两边有空格, 去掉空格后添加
+    */
+
+    /*
+    * 1、拆分组件
+    *   * 应用主组件： App
+    *   * 添加todo的组件： AddTodo
+    *   * 显示todos组件： TodoList
+    * 2、数据初始化在哪：App
+    *
+    * */
+    // 定义主组件
+    class App extends React.Component {
+      constructor(props){
+        super(props);
+        // 初始化todos的状态
+        this.state = {
+          todos: ['吃饭', '睡觉', '打豆豆']
+        }
+        // 修改add的this指向
+        this.add = this.add.bind(this);
+      }
+      // 定义添加的方法
+      add(newTodo){
+        console.log(newTodo);
+        // 修改状态
+        let {todos} = this.state;
+        todos.unshift(newTodo);
+        this.setState({todos});
+      }
+      render(){
+        let {todos} = this.state;
+        return (
+            <div>
+              <h2>Simple TODO List</h2>
+              <AddTodo add={this.add} length={this.state.todos.length}/>
+              <TodoList todos={todos}/>
+            </div>
+        )
+      }
+    }
+
+    class AddTodo extends React.Component {
+      constructor(props){
+        super(props);
+        // 修改addTodo的this指向
+        this.addTodo = this.addTodo.bind(this);
+      }
+      // 定义添加todo的方法
+      addTodo(){
+        // 收集用户输入的数据
+        let value = this.refs.newTodo.value;
+        // 将数据交给App组件
+        this.props.add(value);
+        // 清空输入内容
+        this.refs.newTodo.value = ''
+      }
+      render(){
+        return (
+            <div>
+              <input ref="newTodo" type="text" />
+              <button onClick={this.addTodo}>Add #{this.props.length}</button>
+            </div>
+        )
+      }
+    }
+
+    class TodoList extends React.Component {
+      render(){
+        let {todos} = this.props;
+        return (
+            <ul>
+              {
+                todos.map((item, index) => {
+                  return <li key={index}>{item}</li>
+                })
+              }
+            </ul>
+        )
+      }
+    }
+    
+    // 渲染组件
+    ReactDOM.render(<App />, document.getElementById('example'));
+
+
+  </script>
+</body>
+</html>
+

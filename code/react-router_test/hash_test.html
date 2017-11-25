@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--
+关于url中#的作用:
+* 学习: http://www.ruanyifeng.com/blog/2011/03/url_hash.html
+* #代表网页中的一个位置。其右面的字符，就是该位置的片段标识符
+* 改变#不触发网页重载
+* 改变#会改变浏览器的访问历史
+* window.location.hash读取#值
+* window.onhashchange = func 监听hash改变
+-->
+  <a href="#/test1">hash test1</a><br><br>
+  <a href="#/test2">hash test2</a><br><br>
+  <button id="test3">hash test3</button><br><br>
+  <button id="test4">hash test4</button><br><br>
+  <script type="text/javascript">
+    window.onload = function () {
+      document.getElementById('test3').onclick = function () {
+        console.log(window.location.hash);
+      }
+      document.getElementById('test4').onclick = function () {
+        window.location.hash = '/test4'
+      }
+      
+      window.onhashchange = function () {
+        console.log(window.location.hash);
+      }
+    }
+  </script>
+</body>
+</html>

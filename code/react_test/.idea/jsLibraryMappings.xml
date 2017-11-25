@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/prepare/11_react-server" libraries="{react_test/prepare/11_react-server/node_modules}" />
+    <file url="file://$PROJECT_DIR$/work/11_react-server/react-node" libraries="{react_test/work/11_react-server/react-node/node_modules}" />
+    <includedPredefinedLibrary name="ECMAScript 6" />
+  </component>
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/prepare/hello-ajax" libraries="{react_demo/prepare/hello-ajax/node_modules}" />
+    <file url="file://$PROJECT_DIR$/prepare/hello-comment" libraries="{react_demo/prepare/hello-comment/node_modules}" />
+    <file url="file://$PROJECT_DIR$/prepare/hello-react" libraries="{react_demo/prepare/hello-react/node_modules}" />
+    <file url="file://$PROJECT_DIR$/work/hello-ajax" libraries="{react_demo/work/hello-ajax/node_modules}" />
+    <file url="file://$PROJECT_DIR$/work/hello-comments" libraries="{react_demo/work/hello-comments/node_modules}" />
+    <file url="file://$PROJECT_DIR$/work/hello-react" libraries="{react_demo/work/hello-react/node_modules}" />
+    <includedPredefinedLibrary name="ECMAScript 6" />
+  </component>
+</project>
